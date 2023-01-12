@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class streamPractice {
+public class StreamPractice {
     public static void main(String[] args) {
         List<OnlineClass> springClasses = new ArrayList<>();
         springClasses.add(new OnlineClass(1, "spring boot", true));
@@ -22,24 +21,42 @@ public class streamPractice {
 
         System.out.println("spring 으로 시작하는 수업");
         // TODO
-        List<String> classesStartswithSpring = springClasses.stream()
+        /*List<String> classesStartswithSpring = springClasses.stream()
                 .map(s -> s.getTitle())
                 .filter(s -> s.startsWith("spring"))
                 .collect(Collectors.toList());
-        classesStartswithSpring.forEach(System.out::println);
+        classesStartswithSpring.forEach(System.out::println);*/
         // 오 존나 재밌어
         // 근데 반환하지 않고 처음 소스(classesStartswithSpring)를 그대로 쓰기 위해 그대로 삽입 x?
         // yes. 왜냐면 terminal op들은 대부분 특정 타입의 객체들을 모아서 반환하기 때문임!
 
         System.out.println("close 되지 않은 수업");
         // TODO
+        /*// 내가 구현한 코드
+        springClasses.stream()
+                .filter(eachClass -> !eachClass.isClosed())
+                .collect(Collectors.toList())
+                .stream()
+                .forEach((eachClass) -> {
+                    System.out.println(eachClass.getTitle());
+                });
+        // 백기선님 코드
+        // Predicate라는 Functional Interface에서
+        springClasses.stream()
+                .filter(Predicate.not(OnlineClass::isClosed))
+                .forEach(oc -> System.out.println(oc.getId()));*/
 
         System.out.println("수업 이름만 모아서 스트림 만들기");
         // TODO
-
+        /*springClasses.stream()
+                .map(oc -> oc.getTitle())
+                .forEach(System.out::println);*/
 
         System.out.println("두 수업 목록에 들어있는 모든 수업 아이디 출력");
         // TODO
+        springClasses.addAll(javaClasses);
+        springClasses.stream()
+                .forEach(e -> System.out.println(e.getId()));
 
         System.out.println("10부터 1씩 증가하는 무제한 스트림 중에서 앞에 10개 빼고 최대 10개 까지만");
         // TODO
